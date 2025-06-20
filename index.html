@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern 12. Sınıf Geri Sayım</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .countdown {
+      display: flex;
+      gap: 20px;
+      font-size: 3.5rem;
+      font-weight: 600;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .time-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px 25px;
+      border-radius: 12px;
+      min-width: 100px;
+      transition: background 0.3s ease;
+    }
+    .time-box:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .label {
+      font-size: 1rem;
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #e0e0e0;
+    }
+
+    @media (max-width: 600px) {
+      .countdown {
+        font-size: 2.5rem;
+        gap: 12px;
+      }
+      .time-box {
+        min-width: 70px;
+        padding: 15px 10px;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>12. Sınıfa Kalan Günler</h1>
+  <div class="countdown">
+    <div class="time-box">
+      <div id="days">0</div>
+      <div class="label">Gün</div>
+    </div>
+    <div class="time-box">
+      <div id="hours">0</div>
+      <div class="label">Saat</div>
+    </div>
+    <div class="time-box">
+      <div id="minutes">0</div>
+      <div class="label">Dakika</div>
+    </div>
+    <div class="time-box">
+      <div id="seconds">0</div>
+      <div class="label">Saniye</div>
+    </div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("2025-09-07T00:00:00");
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.querySelector('.countdown').innerHTML = "<h2>Bugün!</h2>";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
